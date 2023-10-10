@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
 
 
 @SpringBootApplication
@@ -19,7 +21,12 @@ public class TondeuseKataApplication {
 	public static void main(String[] args)   {
 		TondeuseService tondeuseService = new TondeuseServiceImpl();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("src/input.txt"));
+
+			URL res = TondeuseKataApplication.class.getClassLoader().getResource("input.txt");
+
+			Path inputFile = Path.of(res.getPath());
+
+			BufferedReader reader = new BufferedReader(new FileReader(inputFile.toFile()));
 			String line;
 			int  i = 0;
 			while ((line = reader.readLine()) != null) {
@@ -54,7 +61,6 @@ public class TondeuseKataApplication {
 	}
 
 	private static void initPelouse(Integer x, Integer y, TondeuseService tondeuseService) {
-
 		tondeuseService.initializePelouse(x, y);
 	}
 

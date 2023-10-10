@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class TondeuseServiceImpl implements TondeuseService{
@@ -14,15 +16,11 @@ public class TondeuseServiceImpl implements TondeuseService{
     private List<Tondeuse> tondeuses  = new ArrayList<>();
     @Override
     public void initializePelouse(int maxX, int maxY) {
-
-        pelouse = new ArrayList<>(maxX);
-        for (int i = 0; i < maxX; i++) {
-            List<Tondeuse> row = new ArrayList<>(maxY);
-            for (int j = 0; j < maxY; j++) {
-                row.add(null);
-            }
-            pelouse.add(row);
-        }
+        pelouse = IntStream.range(0, maxX)
+                .mapToObj(i -> IntStream.range(0, maxY)
+                        .mapToObj(j -> (Tondeuse) null)
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
     @Override
