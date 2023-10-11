@@ -23,3 +23,7 @@ Bonjour, ce projet a pour objectif de réaliser un programme qui automatise une 
 ./gradlew test
 ```
 
+###  le fichier de données 
+
+* Vous trouverez le fichier de données dans le répertoire "resources/input.txt"
+
